@@ -13,11 +13,14 @@ pacman::p_load(sf, tmap, tidyverse)
 ```
 
 # 2.1 Importing Geospatial Data into R
+
 ```{r}
 mpsz <- st_read(dsn = "/Users/andy/Desktop/IS415-VAA/Hands-on_Ex/Hands-On_Ex02/data/geospatial/MasterPlan2014SubzoneBoundaryWebSHP", 
                 layer = "MP14_SUBZONE_WEB_PL")
 ```
+
 # 2.2 Importing Attribute Data into R
+
 ```{r}
 popdata <- read_csv("/Users/andy/Desktop/IS415-VAA/Hands-on_Ex/Hands-On_Ex02/data/aspatial/respopagesextod2011to2020/respopagesextod2011to2020.csv")
 ```
@@ -46,6 +49,7 @@ mutate(`DEPENDENCY` = (`YOUNG` + `AGED`)
 ```
 
 # 2.4 Joining the attribute data and geospatial data
+
 ```{r}
 popdata2020 <- popdata2020 %>%
   mutate_at(.vars = vars(PA, SZ), 
@@ -67,6 +71,7 @@ write_rds(mpsz_pop2020, "/Users/andy/Desktop/IS415-VAA/Hands-on_Ex/Hands-On_Ex02
 ```
 
 # 2.5 Plotting a choropleth map quickly by using qtm()
+
 ```{r}
 tmap_mode("plot")
 qtm(mpsz_pop2020, 
@@ -74,6 +79,7 @@ qtm(mpsz_pop2020,
 ```
 
 # 2.6 Creating a choropleth map by using tmap’s elements
+
 ```{r}
 tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY", 
@@ -95,18 +101,21 @@ tm_shape(mpsz_pop2020)+
 ```
 
 # 2.7 Drawing a base map
+
 ```{r}
 tm_shape(mpsz_pop2020) +
   tm_polygons()
 ```
 
 # 2.8 Drawing a choropleth map using tm_polygons()
+
 ```{r}
 tm_shape(mpsz_pop2020)+
   tm_polygons("DEPENDENCY")
 ```
 
-# 2.9 Drawing a choropleth map using tm_fill() and *tm_border()**
+# 2.9 Drawing a choropleth map using tm_fill() and \*tm_border()\*\*
+
 ```{r}
 tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY")
@@ -119,6 +128,7 @@ tm_shape(mpsz_pop2020)+
 ```
 
 # 2.10 Plotting choropleth maps with built-in classification methods
+
 ```{r}
 tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY",
@@ -136,6 +146,7 @@ tm_shape(mpsz_pop2020)+
 ```
 
 # 2.11 Plotting choropleth map with custome break
+
 ```{r}
 summary(mpsz_pop2020$DEPENDENCY)
 ```
@@ -148,6 +159,7 @@ tm_shape(mpsz_pop2020)+
 ```
 
 # 2.12 Colour Scheme
+
 ```{r}
 tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY",
@@ -166,6 +178,7 @@ tm_shape(mpsz_pop2020)+
 ```
 
 # 2.13 Map Layouts
+
 ```{r}
 tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY", 
@@ -186,6 +199,7 @@ tm_shape(mpsz_pop2020)+
 ```
 
 # 2.14 Map Style
+
 ```{r}
 tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY", 
@@ -196,6 +210,7 @@ tm_shape(mpsz_pop2020)+
 ```
 
 # 2.15 Cartographic Furniture
+
 ```{r}
 tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY", 
@@ -221,6 +236,7 @@ tmap_style("white")
 ```
 
 # 2.16 Drawing Small Multiple Choropleth Maps
+
 ```{r}
 tm_shape(mpsz_pop2020)+
   tm_fill(c("YOUNG", "AGED"),
@@ -240,6 +256,7 @@ tm_shape(mpsz_pop2020)+
 ```
 
 # 2.17 Defining a group-by variable in tm_facets()
+
 ```{r}
 tm_shape(mpsz_pop2020) +
   tm_fill("DEPENDENCY",
@@ -256,6 +273,7 @@ tm_shape(mpsz_pop2020) +
 ```
 
 # 2.18 Creating multiple stand-alone maps with tmap_arrange()
+
 ```{r}
 youngmap <- tm_shape(mpsz_pop2020)+ 
   tm_polygons("YOUNG", 
@@ -271,6 +289,7 @@ tmap_arrange(youngmap, agedmap, asp=1, ncol=2)
 ```
 
 # 2.19 Mappping Spatial Object Meeting a Selection Criterion
+
 ```{r}
 tm_shape(mpsz_pop2020[mpsz_pop2020$REGION_N=="CENTRAL REGION", ])+
   tm_fill("DEPENDENCY", 

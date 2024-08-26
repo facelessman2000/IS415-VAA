@@ -1,0 +1,81 @@
+---
+title: "In-class Exercise 2: Fundamental of Geospatial Data Visualisation and tmap Methods"
+author: "Andy Tan"
+date: "August 26, 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true #run through the code if there is an error
+  echo: true #show all the code used
+  freeze: true #only render qmd files changes made
+---
+
+Importing packages
+
+```{r}
+pacman::p_load(sf, tidyverse)
+```
+
+Importing data
+
+```{r}
+mpsz14_shp = st_read(dsn = "/Users/andy/Desktop/IS415-VAA/In-class_Ex/In-class_Ex02/data/geospatial", layer = "MP14_SUBZONE_WEB_PL")
+```
+
+```{r}
+#\| eval: false mpsz14_kml = st_read("/Users/andy/Desktop/IS415-VAA/In-class_Ex/In-class_Ex02/data/MasterPlan2014SubzoneBoundaryWebKML.kml")
+```
+
+```{r}
+#\| eval: false mpsz14_kml = st_read("/Users/andy/Desktop/IS415-VAA/In-class_Ex/In-class_Ex02/data/MasterPlan2019SubzoneBoundaryNoSeaKML.kml")
+```
+
+```{r}
+presch_kml = st_read("/Users/andy/Desktop/IS415-VAA/In-class_Ex/In-class_Ex02/data/geospatial/PreSchoolsLocation.kml") %>% st_transform(crs = 3414)
+```
+
+```{r}
+mpsz19_shp = st_read(dsn = "/Users/andy/Desktop/IS415-VAA/In-class_Ex/In-class_Ex02/data/geospatial", layer =  "MPSZ-2019") %>% st_transform(crs = 3414)
+
+st_crs(mpsz19_shp) # to check the EPSG 3414
+
+#go to epsg.io to find the crs system
+# %>% to glue to syntax together
+
+```
+
+```{r}
+mpsz19_kml = st_read("/Users/andy/Desktop/IS415-VAA/In-class_Ex/In-class_Ex02/data/geospatial/MasterPlan2019SubzoneBoundaryNoSeaKML.kml")
+#in the kml if the multiplygon is between 0 to 360 with decial point it is not in projected coordinate system
+
+```
+
+```{r}
+popdata = read_csv("data/respopagesextod2023/respopagesextod2023.csv")
+```
+
+```{r}
+popdata2023 <- popdata %>%
+  group_by(PA, SZ, AG) %>%
+  summarise(POP = sum(Pop)) %>%
+  ungroup()%>%
+  pivot_wider(names_from= AG, 
+              values_from=POP)
+```
+
+```{r}
+  colnames(popdata2023)
+```
+
+```{r}
+popdata2023 <- popdata2023 %>%
+  mutate_at(.vars = vars(PA, SZ), 
+          .funs = list(toupper))
+```
+
+```{r}
+mpsz_pop2023 <- left_join(mpsz19_shp, popdata2023, by = c("SUBZONE_N" = "SZ"))
+```
+
+```{r}
+pop2023_mpsz <- left_join(popdata2023, mpsz19_shp, by = c("SZ" = "SUBZONE_N"))
+```
