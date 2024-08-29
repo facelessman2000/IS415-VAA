@@ -1,9 +1,23 @@
 ---
-title: "About"
+title: "About Me"
 ---
 
-About this site
+![IS415: Geospatial Analytics and Applications](geospatial_img.png){width=300%}
 
-```{r}
-1 + 1
-```
+
+Welcome to my course website! My name is Andy Tan, and I am currently pursuing a Bachelors in Information Systems at Singapore Management University (SMU).
+
+This site is developed to document my journey through the course module [IS415: Geospatial Analytics and Applications](https://x.smu.edu.sg/courses/geospatial-analytics-applications-1) under the guidance of Prof. Kam Tin Seong. Here, you'll find updates on my projects, insights, and any relevant coursework related to geospatial analytics.
+
+## My Academic Journey
+
+- **Degree:** Bachelors in Information Systems
+- **University:** Singapore Management University (SMU)
+
+## Course Overview
+
+The course module IS415: Geospatial Analytics and Applications focuses on the application of geospatial data and analytics in various contexts. This website serves as a platform to showcase the work and learning outcomes from this course.
+
+## Contact
+
+Feel free to reach out to me via [andy.tan.2022@scis.smu.edu.sg](andy.tan.2022@scis.smu.edu.sg) if you have any questions or would like to connect.
