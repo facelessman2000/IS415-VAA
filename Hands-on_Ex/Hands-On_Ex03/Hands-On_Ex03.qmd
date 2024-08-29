@@ -1,0 +1,14 @@
+---
+title: "Hands-on_Ex03"
+author: "Andy Tan"
+date: "27 August 2024"
+date-modified: "last-modified"
+output:
+  html-documnet:
+    toc: yes
+---
+
+```{r}
+pacman::p_load(sf, raster, spatstat, tmap, tidyverse)
+```
+

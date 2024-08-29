@@ -4,9 +4,9 @@ author: "Andy Tan"
 date: "August 26, 2024"
 date-modified: "last-modified"
 execute: 
-  eval: true #run through the code if there is an error
-  echo: true #show all the code used
-  freeze: true #only render qmd files changes made
+  eval: true 
+  echo: true 
+  freeze: true 
 ---
 
 Importing packages
@@ -38,14 +38,12 @@ mpsz19_shp = st_read(dsn = "/Users/andy/Desktop/IS415-VAA/In-class_Ex/In-class_E
 
 st_crs(mpsz19_shp) # to check the EPSG 3414
 
-#go to epsg.io to find the crs system
-# %>% to glue to syntax together
-
 ```
 
 ```{r}
 mpsz19_kml = st_read("/Users/andy/Desktop/IS415-VAA/In-class_Ex/In-class_Ex02/data/geospatial/MasterPlan2019SubzoneBoundaryNoSeaKML.kml")
-#in the kml if the multiplygon is between 0 to 360 with decial point it is not in projected coordinate system
+
+#kml if the multiplygon is between 0 to 360 with decial point not in projected coordinate system
 
 ```
 
